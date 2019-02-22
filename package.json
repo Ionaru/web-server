@@ -10,7 +10,7 @@
     ],
     "scripts": {
         "build": "tsc --project tsconfig.json",
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "echo \"Error: no test specified\" && exit 0",
         "lint": "tslint --project tsconfig.json -c tslint.json \"src/**/*.ts\" --format stylish",
         "prepare": "npm run build",
         "preversion": "npm run lint && npm run test"
@@ -24,5 +24,7 @@
         "tslint": "latest",
         "typescript": "latest"
     },
-    "dependencies": {}
+    "dependencies": {
+        "@ionaru/typed-events": "0.0.1"
+    }
 }

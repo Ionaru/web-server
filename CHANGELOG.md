@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- Initial code
 - Setup for this project
 
-[Unreleased]: https://github.com/Ionaru/web-server/compare/0.0.1...HEAD
+[Unreleased]: https://github.com/Ionaru/web-server/compare/d563dcd...HEAD
