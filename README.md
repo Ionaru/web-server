@@ -1,5 +1,9 @@
 # @ionaru/web-server
 
+[![npm version](https://img.shields.io/npm/v/@ionaru/web-server.svg?style=for-the-badge)](https://www.npmjs.com/package/@ionaru/web-server)
+[![npm version](https://img.shields.io/npm/v/@ionaru/web-server/next.svg?style=for-the-badge)](https://www.npmjs.com/package/@ionaru/web-server/v/next)
+[![Build Status](https://img.shields.io/travis/Ionaru/web-server/master.svg?style=for-the-badge)](https://travis-ci.org/Ionaru/web-server)
+
 ## Description
 A package for creating a simple web server.
 
