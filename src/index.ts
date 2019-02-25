@@ -3,8 +3,8 @@ import { createServer, RequestListener, Server } from 'http';
 
 export class WebServer {
 
-    public static infoLogEvent = new TypedEvent<string>();
-    public static errorLogEvent = new TypedEvent<string>();
+    public infoLogEvent = new TypedEvent<string>();
+    public errorLogEvent = new TypedEvent<string>();
 
     public server: Server;
 
@@ -12,23 +12,36 @@ export class WebServer {
 
     constructor(requestListener: RequestListener, port: number) {
 
-        WebServer.infoLogEvent.emit('Creating web server');
+        this.infoLogEvent.emit('Creating web server');
 
-        this.server = createServer(requestListener);
         this.port = port;
+        this.server = createServer(requestListener);
+    }
 
-        this.server.on('error', (error) => this.serverError(error));
-        this.server.on('listening', () => this.announceListening());
+    public async close() {
+        return new Promise((resolve, reject) => {
+            this.server.close((error: Error) => {
+                return error ? reject(error) : resolve();
+            });
+        });
+    }
 
-        this.server.listen(this.port);
+    public listen() {
+        return new Promise((resolve) => {
+            this.server.on('error', (error) => this.serverError(error));
+            this.server.listen(this.port, () => {
+                this.announceListening();
+                resolve();
+            });
+        });
     }
 
     /**
      * Function that is called when the server has started listening for requests.
      */
     private announceListening(): void {
-        WebServer.infoLogEvent.emit(`Listening on port ${this.port}`);
-        WebServer.infoLogEvent.emit('Ready for connections...');
+        this.infoLogEvent.emit(`Listening on port ${ this.port }`);
+        this.infoLogEvent.emit('Ready for connections...');
     }
 
     private serverError(error: any): void {
@@ -39,10 +52,10 @@ export class WebServer {
         // Handle specific listen errors with useful messages.
         switch (error.code) {
             case 'EACCES':
-                WebServer.errorLogEvent.emit(`Port ${this.port} requires elevated privileges`);
+                this.errorLogEvent.emit(`Port ${ this.port } requires elevated privileges`);
                 throw error;
             case 'EADDRINUSE':
-                WebServer.errorLogEvent.emit(`Port ${this.port} is already in use`);
+                this.errorLogEvent.emit(`Port ${ this.port } is already in use`);
                 throw error;
             default:
                 throw error;

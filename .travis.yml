@@ -5,5 +5,27 @@ node_js:
     - '8' # EOL: December 2019
     - '6' # EOL: April 2019
 script:
-    - npm run lint
     - npm run test
+before_deploy:
+    - if [ "$TRAVIS_BRANCH" = master ] && [ "$TRAVIS_PULL_REQUEST" = false ]; then npm version prerelease --no-git-tag-version --preid "$TRAVIS_BUILD_NUMBER"; fi
+deploy:
+    - provider: npm
+      email: info@saturnserver.org
+      api_key:
+          secure: Ua9frc4mC1a5xX1mqSOSEcng4RPWTiSpzB1ugLAWRrKon2B1X0rBytnSM+C36G9Is8YOYPOGJ7icFXdSI3jS1jHCkbNxvB7CmEhhyVuoUg83J/USgtDlf65UmKXPoQQmpI12JYd7nLXfa9nLE6IYb1Y40VaB+NifTfppQZGMGifZci0uqu1AzZJ5vLLSYGMY24xEurNoNvrdzCo69yo5cAOtrQPSE5BSenJuR+tbLjEMOYoFZyo9GLNycPLOksXSx7LL1+1vE9rDB/cDjld3tTE75tYR0sR18M7YnAvmrJWhi7oGqVzD+e4ZQ/BsvM5iPTFWhVk4bXu9Yow2BtjyuRX74dj5Y5rdBAxO5+5F9L+YMn5LxrGA/nYc/i4o5DwREkWaPytP8Ob5Gf563cISVxZjn8zuODy8FQtT2N4PCn5HUQLo96r4duRofaiOhQQ/Hk+nSudjDc83t/c/4ewaSdqOZWl1khfHu7E/e6IMOeYRrqUeVkxgsHLmSdRWvHuprKbVpKzdCfCSKTZg3Wjvklw8v4AFcgJTdPPbIkJYbl8s/3IkzZSW25fFjCgy1Bs/jmNVvGw6PEQRC8aavGaTEyodTqfy9qlwuEK8oeMgnm3DVtj55fQ8ObKYeDpDcyLNl+IGiBElwzeyd5KOs7i76jXx0RsHCstS+ILxGTmI7G8=
+      tag: next
+      skip_cleanup: true
+      on:
+          node: 10
+          branch: master
+          repo: Ionaru/web-server
+    - provider: npm
+      email: info@saturnserver.org
+      api_key:
+          secure: Ua9frc4mC1a5xX1mqSOSEcng4RPWTiSpzB1ugLAWRrKon2B1X0rBytnSM+C36G9Is8YOYPOGJ7icFXdSI3jS1jHCkbNxvB7CmEhhyVuoUg83J/USgtDlf65UmKXPoQQmpI12JYd7nLXfa9nLE6IYb1Y40VaB+NifTfppQZGMGifZci0uqu1AzZJ5vLLSYGMY24xEurNoNvrdzCo69yo5cAOtrQPSE5BSenJuR+tbLjEMOYoFZyo9GLNycPLOksXSx7LL1+1vE9rDB/cDjld3tTE75tYR0sR18M7YnAvmrJWhi7oGqVzD+e4ZQ/BsvM5iPTFWhVk4bXu9Yow2BtjyuRX74dj5Y5rdBAxO5+5F9L+YMn5LxrGA/nYc/i4o5DwREkWaPytP8Ob5Gf563cISVxZjn8zuODy8FQtT2N4PCn5HUQLo96r4duRofaiOhQQ/Hk+nSudjDc83t/c/4ewaSdqOZWl1khfHu7E/e6IMOeYRrqUeVkxgsHLmSdRWvHuprKbVpKzdCfCSKTZg3Wjvklw8v4AFcgJTdPPbIkJYbl8s/3IkzZSW25fFjCgy1Bs/jmNVvGw6PEQRC8aavGaTEyodTqfy9qlwuEK8oeMgnm3DVtj55fQ8ObKYeDpDcyLNl+IGiBElwzeyd5KOs7i76jXx0RsHCstS+ILxGTmI7G8=
+      skip_cleanup: true
+      on:
+          node: 10
+          branch: master
+          tags: true
+          repo: Ionaru/web-server
