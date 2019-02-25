@@ -11,9 +11,6 @@ export class WebServer {
     private readonly port: number;
 
     constructor(requestListener: RequestListener, port: number) {
-
-        this.infoLogEvent.emit('Creating web server');
-
         this.port = port;
         this.server = createServer(requestListener);
     }
