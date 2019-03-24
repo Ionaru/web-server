@@ -1,22 +1,24 @@
-import { TypedEvent } from '@ionaru/typed-events';
+import Debug from 'debug';
 import { createServer, RequestListener, Server } from 'http';
 
 export class WebServer {
 
-    public infoLogEvent = new TypedEvent<string>();
-    public errorLogEvent = new TypedEvent<string>();
-
     public server: Server;
 
     private readonly port: number;
+    private readonly debug = Debug('web-server');
 
-    constructor(requestListener: RequestListener, port: number) {
-        this.port = port;
+    constructor(requestListener: RequestListener, port?: number) {
+
+        this.debug('Creating web-server.');
+
+        this.port = port || 8080;
         this.server = createServer(requestListener);
     }
 
     public async close() {
         return new Promise((resolve, reject) => {
+            this.debug(`Closing web-server.`);
             this.server.close((error: Error) => {
                 return error ? reject(error) : resolve();
             });
@@ -26,6 +28,7 @@ export class WebServer {
     public listen() {
         return new Promise((resolve) => {
             this.server.on('error', (error) => this.serverError(error));
+            this.debug(`Creating listener on port ${this.port}.`);
             this.server.listen(this.port, () => {
                 this.announceListening();
                 resolve();
@@ -37,8 +40,8 @@ export class WebServer {
      * Function that is called when the server has started listening for requests.
      */
     private announceListening(): void {
-        this.infoLogEvent.emit(`Listening on port ${ this.port }`);
-        this.infoLogEvent.emit('Ready for connections...');
+        this.debug(`Listening on port ${ this.port }.`);
+        this.debug('Ready for connections...');
     }
 
     private serverError(error: any): void {
@@ -49,10 +52,10 @@ export class WebServer {
         // Handle specific listen errors with useful messages.
         switch (error.code) {
             case 'EACCES':
-                this.errorLogEvent.emit(`Port ${ this.port } requires elevated privileges`);
+                this.debug(`Port ${ this.port } requires elevated privileges.`);
                 throw error;
             case 'EADDRINUSE':
-                this.errorLogEvent.emit(`Port ${ this.port } is already in use`);
+                this.debug(`Port ${ this.port } is already in use.`);
                 throw error;
             default:
                 throw error;

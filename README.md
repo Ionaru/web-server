@@ -3,6 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/@ionaru/web-server.svg?style=for-the-badge)](https://www.npmjs.com/package/@ionaru/web-server)
 [![npm version](https://img.shields.io/npm/v/@ionaru/web-server/next.svg?style=for-the-badge)](https://www.npmjs.com/package/@ionaru/web-server/v/next)
 [![Build Status](https://img.shields.io/travis/Ionaru/web-server/master.svg?style=for-the-badge)](https://travis-ci.org/Ionaru/web-server)
+[![codecov](https://img.shields.io/codecov/c/github/Ionaru/web-server/master.svg?style=for-the-badge)](https://codecov.io/gh/Ionaru/web-server)
 
 ## Description
 A package for creating a simple web server.
@@ -16,7 +17,7 @@ npm install @ionaru/web-server
 ```js
 new WebServer((request, response) => {
     // Handle request
-}, 3000).listen();
+}).listen();
 ```
 
 ### Express
@@ -27,7 +28,7 @@ expressApplication.use('/', (request, response) => {
     // Handle request
 });
 
-new WebServer(expressApplication, 3000).listen();
+new WebServer(expressApplication).listen();
 ```
 
 ### Separate listening call

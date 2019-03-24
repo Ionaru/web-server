@@ -10,16 +10,21 @@
     ],
     "scripts": {
         "build": "tsc --project tsconfig.json",
-        "lint:src": "tslint --project tsconfig.json -c tslint.json src/**/*.ts --format stylish",
-        "lint:spec": "tslint --project tsconfig.json -c tslint.json test/**/*.ts --format stylish",
-        "lint": "npm run lint:src && npm run lint:spec",
+        "lint": "npm run lint:src && npm run lint:test",
+        "lint:src": "tslint --project tsconfig.json -c tslint.json --format stylish",
+        "lint:test": "tslint -c tslint.json src/**/*.spec.ts --format stylish",
         "pretest": "npm run lint",
-        "test": "jest",
+        "test": "jest src",
         "prepare": "npm run build",
         "preversion": "npm run test"
     },
     "jest": {
         "collectCoverage": true,
+        "collectCoverageFrom": [
+            "src/**/*.ts",
+            "!src/**/*.d.ts",
+            "!src/**/*.spec.ts"
+        ],
         "preset": "ts-jest",
         "testEnvironment": "node"
     },
@@ -28,14 +33,16 @@
     "repository": "github:Ionaru/web-server",
     "license": "MIT",
     "devDependencies": {
-        "@types/jest": "^24.0.6",
+        "@types/debug": "^4.1.2",
+        "@types/jest": "^24.0.11",
         "@types/node": "latest",
-        "jest": "^24.1.0",
+        "jest": "^24.5.0",
         "ts-jest": "^24.0.0",
         "tslint": "latest",
+        "tslint-sonarts": "^1.9.0",
         "typescript": "latest"
     },
     "dependencies": {
-        "@ionaru/typed-events": "0.0.1"
+        "debug": "^4.1.1"
     }
 }
