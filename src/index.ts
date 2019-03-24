@@ -1,13 +1,24 @@
 import Debug from 'debug';
 import { createServer, RequestListener, Server } from 'http';
 
+/**
+ * Class of a Web Server.
+ */
 export class WebServer {
 
+    /**
+     * Exposed instance of the Node.js Server.
+     */
     public server: Server;
 
     private readonly port: number;
     private readonly debug = Debug('web-server');
 
+    /**
+     * Create the Web Server.
+     * @param {RequestListener} requestListener - A function or module that can handle requests.
+     * @param {number} port - The port the Web Server will listen on.
+     */
     constructor(requestListener: RequestListener, port = 8080) {
 
         this.debug('Creating web-server.');
@@ -16,7 +27,10 @@ export class WebServer {
         this.server = createServer(requestListener);
     }
 
-    public async close() {
+    /**
+     * Stop the Web Server from accepting new connections.
+     */
+    public async close(): Promise<void> {
         return new Promise((resolve, reject) => {
             this.debug(`Closing web-server.`);
             this.server.close((error: Error) => {
@@ -25,7 +39,10 @@ export class WebServer {
         });
     }
 
-    public listen() {
+    /**
+     * Starts the Web Server listening for connections.
+     */
+    public listen(): Promise<void> {
         return new Promise((resolve) => {
             this.server.on('error', (error) => this.serverError(error));
             this.debug(`Creating listener on port ${this.port}.`);
@@ -44,6 +61,9 @@ export class WebServer {
         this.debug('Ready for connections...');
     }
 
+    /**
+     * Function that is called when the server has encountered an error at any time.
+     */
     private serverError(error: any): void {
         if (error.syscall !== 'listen') {
             throw error;
