@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Docstrings to code.
 
+### Fixed
+- Server close callback parameter.
+
 ### Removed
 - logEvent documentation.
 

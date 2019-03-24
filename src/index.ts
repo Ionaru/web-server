@@ -33,7 +33,7 @@ export class WebServer {
     public async close(): Promise<void> {
         return new Promise((resolve, reject) => {
             this.debug(`Closing web-server.`);
-            this.server.close((error: Error) => {
+            this.server.close((error?: Error) => {
                 return error ? reject(error) : resolve();
             });
         });
