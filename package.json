@@ -15,6 +15,7 @@
         "lint:test": "tslint -c tslint.json src/**/*.spec.ts --format stylish",
         "pretest": "npm run lint",
         "test": "jest src",
+        "posttest": "codecov -f coverage/*.json",
         "prepare": "npm run build",
         "preversion": "npm run test"
     },
@@ -36,6 +37,7 @@
         "@types/debug": "^4.1.2",
         "@types/jest": "^24.0.11",
         "@types/node": "latest",
+        "codecov": "^3.2.0",
         "jest": "^24.5.0",
         "ts-jest": "^24.0.0",
         "tslint": "latest",
