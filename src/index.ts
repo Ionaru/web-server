@@ -8,11 +8,11 @@ export class WebServer {
     private readonly port: number;
     private readonly debug = Debug('web-server');
 
-    constructor(requestListener: RequestListener, port?: number) {
+    constructor(requestListener: RequestListener, port = 8080) {
 
         this.debug('Creating web-server.');
 
-        this.port = port || 8080;
+        this.port = port;
         this.server = createServer(requestListener);
     }
 
