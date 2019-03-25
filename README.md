@@ -43,7 +43,7 @@ webServer.listen();
 ## Examples
 ### WebServer.prototype.server
 The created http.Server instance is exposed in the WebServer instance.
-```typescript
+```js
 const myServer = new WebServer((request, response) => {}, 3000).listen();
 myServer.server.address();
 ```
