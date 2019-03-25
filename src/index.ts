@@ -6,13 +6,14 @@ import { createServer, RequestListener, Server } from 'http';
  */
 export class WebServer {
 
+    private static readonly debug = Debug('web-server');
+
     /**
      * Exposed instance of the Node.js Server.
      */
     public server: Server;
 
     private readonly port: number;
-    private readonly debug = Debug('web-server');
 
     /**
      * Create the Web Server.
@@ -21,7 +22,7 @@ export class WebServer {
      */
     constructor(requestListener: RequestListener, port = 8080) {
 
-        this.debug('Creating web-server.');
+        WebServer.debug('Creating web-server.');
 
         this.port = port;
         this.server = createServer(requestListener);
@@ -32,7 +33,7 @@ export class WebServer {
      */
     public async close(): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.debug(`Closing web-server.`);
+            WebServer.debug(`Closing web-server.`);
             this.server.close((error?: Error) => {
                 return error ? reject(error) : resolve();
             });
@@ -45,7 +46,7 @@ export class WebServer {
     public listen(): Promise<void> {
         return new Promise((resolve) => {
             this.server.on('error', (error) => this.serverError(error));
-            this.debug(`Creating listener on port ${this.port}.`);
+            WebServer.debug(`Creating listener on port ${this.port}.`);
             this.server.listen(this.port, () => {
                 this.announceListening();
                 resolve();
@@ -57,8 +58,8 @@ export class WebServer {
      * Function that is called when the server has started listening for requests.
      */
     private announceListening(): void {
-        this.debug(`Listening on port ${ this.port }.`);
-        this.debug('Ready for connections...');
+        WebServer.debug(`Listening on port ${ this.port }.`);
+        WebServer.debug('Ready for connections...');
     }
 
     /**
@@ -72,10 +73,10 @@ export class WebServer {
         // Handle specific listen errors with useful messages.
         switch (error.code) {
             case 'EACCES':
-                this.debug(`Port ${ this.port } requires elevated privileges.`);
+                WebServer.debug(`Port ${ this.port } requires elevated privileges.`);
                 throw error;
             case 'EADDRINUSE':
-                this.debug(`Port ${ this.port } is already in use.`);
+                WebServer.debug(`Port ${ this.port } is already in use.`);
                 throw error;
             default:
                 throw error;

@@ -26,7 +26,7 @@ test('WebServer can receive and respond to a request', (done) => {
 
 test('WebServer uses 8080 by default', (done) => {
     const webServer = new WebServer(() => {/* Empty */});
-    const debugSpy = jest.spyOn<WebServer, any>(webServer, 'debug');
+    const debugSpy = jest.spyOn<any, any>(WebServer, 'debug');
     webServer.listen().then(() => {
         expect(debugSpy).toHaveBeenNthCalledWith(1, `Creating listener on port 8080.`);
 
@@ -52,7 +52,7 @@ test('WebServer announces port on listening', (done) => {
     const port = 5555;
     const webServer = new WebServer(() => {/* Empty */}, port);
 
-    const debugSpy = jest.spyOn<WebServer, any>(webServer, 'debug');
+    const debugSpy = jest.spyOn<any, any>(WebServer, 'debug');
     webServer.listen().then(() => {
         expect(debugSpy).toHaveBeenNthCalledWith(2, `Listening on port ${ port }.`);
         expect(debugSpy).toHaveBeenNthCalledWith(3, 'Ready for connections...');
