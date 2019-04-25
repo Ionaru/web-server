@@ -62,3 +62,12 @@ test('WebServer announces port on listening', (done) => {
         done();
     });
 });
+
+test('WebServer listen and close async', async (done) => {
+    const webServer = new WebServer(() => {/* Empty */});
+
+    await webServer.listen();
+    await webServer.close();
+
+    done();
+});
