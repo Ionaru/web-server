@@ -33,7 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Setup for this project.
 
 [Unreleased]: https://github.com/Ionaru/web-server/compare/2.0.0...HEAD
-[1.0.2]: https://github.com/Ionaru/web-server/compare/1.0.2...2.0.0
+[2.0.0]: https://github.com/Ionaru/web-server/compare/1.0.2...2.0.0
 [1.0.2]: https://github.com/Ionaru/web-server/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/Ionaru/web-server/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/Ionaru/web-server/compare/d563dcd...1.0.0
