@@ -33,7 +33,7 @@ describe('web-server tests', () => {
         expect.assertions(1);
 
         const webServer = new WebServer(() => {/* Empty */});
-        const debugSpy = jest.spyOn<any, any>(WebServer, 'debug');
+        const debugSpy = jest.spyOn<any, any>(webServer, 'debug');
         webServer.listen().then(() => {
             expect(debugSpy).toHaveBeenNthCalledWith(1, `Creating listener on port 8080.`);
 
@@ -63,7 +63,7 @@ describe('web-server tests', () => {
         const port = 5555;
         const webServer = new WebServer(() => {/* Empty */}, port);
 
-        const debugSpy = jest.spyOn<any, any>(WebServer, 'debug');
+        const debugSpy = jest.spyOn<any, any>(webServer, 'debug');
         webServer.listen().then(() => {
             expect(debugSpy).toHaveBeenNthCalledWith(2, `Listening on port ${ port }.`);
             expect(debugSpy).toHaveBeenNthCalledWith(3, 'Ready for connections...');
