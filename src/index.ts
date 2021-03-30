@@ -1,5 +1,6 @@
-import Debug from 'debug';
 import { createServer, RequestListener, Server } from 'http';
+
+import Debug from 'debug';
 
 /**
  * Class of a Web Server.
@@ -20,7 +21,7 @@ export class WebServer {
      * @param {RequestListener} requestListener - A function or module that can handle requests.
      * @param {number} port - The port the Web Server will listen on.
      */
-    constructor(requestListener: RequestListener, port = 8080) {
+    public constructor(requestListener: RequestListener, port = 8080) {
 
         WebServer.debug('Creating web-server.');
 
@@ -34,9 +35,7 @@ export class WebServer {
     public async close(): Promise<void> {
         return new Promise((resolve, reject) => {
             WebServer.debug(`Closing web-server.`);
-            this.server.close((error?: Error) => {
-                return error ? reject(error) : resolve();
-            });
+            this.server.close((error?: Error) => error ? reject(error) : resolve());
         });
     }
 

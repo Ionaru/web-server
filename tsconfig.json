@@ -13,25 +13,20 @@
         "resolveJsonModule": true,
         "lib": [
             "esnext",
+            "es2020",
+            "es2019",
             "es2018",
-            "es2017",
-            "es2016",
-            "es2015"
         ],
         "module": "commonjs",
         "moduleResolution": "node",
-        "outDir": "./dist",
+        "outDir": "dist",
         "sourceMap": true,
-        "target": "es6",
+        "target": "es2017",
         "typeRoots": [
-            "./node_modules/@types"
+            "node_modules/@types"
         ]
     },
-    "exclude": [
-        "./node_modules",
-        "./src/**/*.spec.ts"
-    ],
-    "include": [
-        "./src/**/*.ts"
+    "files": [
+        "src/index.ts"
     ]
 }

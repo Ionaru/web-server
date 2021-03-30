@@ -1,0 +1,17 @@
+{
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "parserOptions": {
+        "project": "tsconfig.eslint.json",
+        "sourceType": "module"
+    },
+    "extends": [
+        "@ionaru",
+        "plugin:jest/all"
+    ],
+    "rules": {
+        "jest/no-hooks": "off"
+    }
+}
