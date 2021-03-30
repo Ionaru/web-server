@@ -4,12 +4,12 @@ on:
     workflow_dispatch:
     push:
         branches:
-            - main
+            - master
         tags:
             - '*'
     pull_request:
         branches:
-            - main
+            - master
 
 jobs:
     test:
@@ -61,11 +61,9 @@ jobs:
                   token: ${{ secrets.NPM_TOKEN }}
 
             - name: Update @next version
-              if: startsWith(github.ref, 'refs/heads/')
               run: npm version prerelease --no-git-tag-version --preid "$GITHUB_RUN_NUMBER"
 
             - name: Deploy @next version to npm
-              if: startsWith(github.ref, 'refs/heads/')
               uses: JS-DevTools/npm-publish@v1
               with:
                   tag: next
