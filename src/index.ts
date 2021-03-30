@@ -1,6 +1,6 @@
 import { createServer, RequestListener, Server } from 'http';
 
-import Debug, { Debugger } from 'debug';
+import { Debugger } from 'debug';
 
 /**
  * Class of a Web Server.
@@ -12,7 +12,7 @@ export class WebServer {
      */
     public server: Server;
 
-    private readonly debug: Debugger;
+    private readonly debug?: Debugger;
     private readonly port: number;
 
     /**
@@ -21,10 +21,10 @@ export class WebServer {
      * @param {number} port - The port the Web Server will listen on.
      * @param {Debugger} debug - A Debugger instance to log debug output to.
      */
-    public constructor(requestListener: RequestListener, port = 8080, debug = Debug('web-server')) {
+    public constructor(requestListener: RequestListener, port = 8080, debug?: Debugger) {
 
         this.debug = debug;
-        this.debug('Creating web-server.');
+        this.log('Creating web-server.');
 
         this.port = port;
         this.server = createServer(requestListener);
@@ -35,7 +35,7 @@ export class WebServer {
      */
     public async close(): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.debug(`Closing web-server.`);
+            this.log(`Closing web-server.`);
             this.server.close((error?: Error) => error ? reject(error) : resolve());
         });
     }
@@ -46,7 +46,7 @@ export class WebServer {
     public listen(): Promise<void> {
         return new Promise((resolve) => {
             this.server.on('error', (error) => this.serverError(error));
-            this.debug(`Creating listener on port ${this.port}.`);
+            this.log(`Creating listener on port ${this.port}.`);
             this.server.listen(this.port, () => {
                 this.announceListening();
                 resolve();
@@ -58,8 +58,8 @@ export class WebServer {
      * Function that is called when the server has started listening for requests.
      */
     private announceListening(): void {
-        this.debug(`Listening on port ${ this.port }.`);
-        this.debug('Ready for connections...');
+        this.log(`Listening on port ${ this.port }.`);
+        this.log('Ready for connections...');
     }
 
     /**
@@ -73,13 +73,19 @@ export class WebServer {
         // Handle specific listen errors with useful messages.
         switch (error.code) {
             case 'EACCES':
-                this.debug(`Port ${ this.port } requires elevated privileges.`);
+                this.log(`Port ${ this.port } requires elevated privileges.`);
                 throw error;
             case 'EADDRINUSE':
-                this.debug(`Port ${ this.port } is already in use.`);
+                this.log(`Port ${ this.port } is already in use.`);
                 throw error;
             default:
                 throw error;
+        }
+    }
+
+    private log(message: string): void {
+        if (this.debug) {
+            this.debug(message);
         }
     }
 }

@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Node.js 14 support.
 - Support for a custom WebServer debug parameter.
 
+### Changed
+- Debug package is now optional.
+
 ## [4.0.0] - 2019-12-28
 ### BREAKING CHANGES
 - Dropped Node.js 8 support.
