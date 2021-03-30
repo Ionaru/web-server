@@ -23,7 +23,7 @@ export class WebServer {
      */
     public constructor(requestListener: RequestListener, port = 8080, debug?: Debugger) {
 
-        this.debug = debug;
+        this.debug = debug ? debug.extend(this.constructor.name) : debug;
         this.log('Creating web-server.');
 
         this.port = port;
@@ -46,7 +46,7 @@ export class WebServer {
     public listen(): Promise<void> {
         return new Promise((resolve) => {
             this.server.on('error', (error) => this.serverError(error));
-            this.log(`Creating listener on port ${this.port}.`);
+            this.log(`Starting listener on port ${this.port}.`);
             this.server.listen(this.port, () => {
                 this.announceListening();
                 resolve();
