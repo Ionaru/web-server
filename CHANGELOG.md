@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 [comment]: <> (## [Unreleased])
+## [4.2.0] - 2021-03-30
+### Changed
+- Made debug package integration optional.
+
 ## [4.1.1] - 2021-03-30
 ### Fixed
 - Deployment issues.
@@ -55,7 +59,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial code.
 - Setup for this project.
 
-[Unreleased]: https://github.com/Ionaru/web-server/compare/4.1.1...HEAD
+[Unreleased]: https://github.com/Ionaru/web-server/compare/4.2.0...HEAD
+[4.2.0]: https://github.com/Ionaru/web-server/compare/4.1.1...4.2.0
 [4.1.1]: https://github.com/Ionaru/web-server/compare/4.1.0...4.1.1
 [4.1.0]: https://github.com/Ionaru/web-server/compare/4.0.0...4.1.0
 [4.0.0]: https://github.com/Ionaru/web-server/compare/3.0.0...4.0.0
