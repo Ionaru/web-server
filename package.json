@@ -1,6 +1,6 @@
 {
     "name": "@ionaru/web-server",
-    "version": "4.1.1",
+    "version": "4.2.0",
     "description": "My package web-server",
     "bin": "dist/index.js",
     "main": "dist/index.js",
