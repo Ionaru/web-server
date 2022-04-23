@@ -15,7 +15,6 @@
         "lint:test": "eslint --ext ts --plugin jest --env jest/globals src/**/*.spec.ts",
         "pretest": "npm run lint",
         "test": "jest src",
-        "posttest": "codecov -f coverage/*.json",
         "prepare": "npm run build",
         "preversion": "npm run test"
     },
@@ -40,7 +39,6 @@
         "@types/node": "^17.0.25",
         "@typescript-eslint/eslint-plugin": "^5.20.0",
         "axios": "^0.26.1",
-        "codecov": "^3.8.1",
         "debug": "^4.3.1",
         "eslint": "^8.14.0",
         "eslint-plugin-import": "^2.26.0",
