@@ -8,8 +8,7 @@
         "sourceType": "module"
     },
     "extends": [
-        "@ionaru",
-        "plugin:jest/all"
+        "@ionaru"
     ],
     "rules": {
         "jest/no-hooks": "off"

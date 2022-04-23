@@ -45,7 +45,7 @@ describe('web-server tests', () => {
         await webServer.listen();
 
         const webResponse = await axios.get('http://localhost:3000');
-        expect(webResponse.status).toStrictEqual(200);
+        expect(webResponse.status).toBe(200);
         expect(webResponse.data).toStrictEqual(data);
     });
 
